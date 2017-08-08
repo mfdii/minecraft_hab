@@ -1,0 +1,12 @@
+#!/bin/bash
+
+exec 2>&1
+
+echo "Starting Minecraft"
+
+export JAVA_HOME=$(hab pkg path core/jdk8)
+export MINECRAFT_HOME=$(hab pkg path mfdii/minecraft)
+
+cd {{pkg.svc_data_path}}
+
+exec ${JAVA_HOME}/bin/java -Xmx1024M -Xms1024M -jar ${MINECRAFT_HOME}/minecraft_server.jar nogui

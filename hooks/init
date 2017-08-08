@@ -1,0 +1,14 @@
+#!/bin/bash -x
+
+exec 2>&1
+
+#cp -a {{pkg.path}}/*.jar {{pkg.svc_path}}/
+
+for file in $(cd {{pkg.svc_config_path}}; ls -1)
+do
+  echo "Linking $file"
+  target="${file//_//}"
+  cp {{pkg.svc_config_path}}/$file {{pkg.svc_data_path}}/$target
+  chown hab:hab {{pkg.svc_data_path}}/$target
+done
+ 
